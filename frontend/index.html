@@ -2,9 +2,12 @@
 <html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Marlin - Learn Anything</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked-gfm-heading-id/lib/index.umd.js"></script>
@@ -21,14 +24,14 @@
                 extend: {
                     colors: {
                         chat: {
-                            bg: '#212121',
-                            sidebar: '#171717',
-                            input: '#2f2f2f',
-                            border: '#383838',
-                            hover: '#2f2f2f',
-                            user: '#2f2f2f',
-                            text: '#ececec',
-                            muted: '#b4b4b4'
+                            bg: '#0c1014',
+                            sidebar: '#131920',
+                            input: '#1a222b',
+                            border: '#243039',
+                            hover: '#1a222b',
+                            user: '#1a222b',
+                            text: '#e9eef2',
+                            muted: '#9aa8b3'
                         }
                     }
                 }
@@ -437,6 +440,94 @@
         .experiment-results dl { display: grid; grid-template-columns: auto 1fr; gap: 0.15rem 0.8rem; }
         .experiment-results dt { color: #b4b4b4; } .experiment-results dd { color: #ececec; font-family: monospace; text-align: right; }
 
+        /* Marlin deep-sea design tokens: presentation-only overrides. */
+        :root {
+            color-scheme: dark;
+            --marlin-bg: #0c1014;
+            --marlin-surface: #131920;
+            --marlin-surface-2: #1a222b;
+            --marlin-border: #243039;
+            --marlin-text: #e9eef2;
+            --marlin-muted: #9aa8b3;
+            --marlin-subtle: #66757f;
+            --marlin-accent: #4fd1c5;
+            --marlin-accent-ink: #04211e;
+            --marlin-font: 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        body { font-family: var(--marlin-font) !important; background: var(--marlin-bg) !important; color: var(--marlin-text) !important; }
+        .bg-chat-bg, main, #chat-container { background-color: var(--marlin-bg) !important; }
+        .bg-chat-sidebar { background-color: var(--marlin-surface) !important; }
+        .bg-chat-input, .bg-chat-hover { background-color: var(--marlin-surface-2) !important; }
+        .border-chat-border { border-color: var(--marlin-border) !important; }
+        .text-chat-text { color: var(--marlin-text) !important; }
+        .text-chat-muted { color: var(--marlin-muted) !important; }
+        .text-blue-500, .text-blue-400, .text-blue-300 { color: var(--marlin-accent) !important; }
+        .bg-blue-500 { background-color: var(--marlin-accent) !important; color: var(--marlin-accent-ink) !important; }
+        .border-blue-500 { border-color: var(--marlin-accent) !important; }
+        :focus-visible { outline-color: var(--marlin-accent); }
+
+        #sidebar { background: var(--marlin-surface) !important; border-color: var(--marlin-border) !important; }
+        #sidebar input { background: var(--marlin-surface-2) !important; border-color: var(--marlin-border) !important; color: var(--marlin-text) !important; }
+        #sidebar .bg-gradient-to-tr { background: linear-gradient(135deg, var(--marlin-accent), #258f88) !important; color: var(--marlin-accent-ink) !important; }
+        main > header { background: rgba(12, 16, 20, .96) !important; border-color: var(--marlin-border) !important; backdrop-filter: blur(14px); }
+
+        #empty-state { max-width: 720px; gap: 24px; }
+        #empty-state h1 { color: var(--marlin-text); letter-spacing: -.03em; }
+        #empty-state .grid > button { background: var(--marlin-surface); border-color: var(--marlin-border); border-radius: 14px; transition: transform .2s ease, background .2s ease, border-color .2s ease; }
+        #empty-state .grid > button:hover { background: var(--marlin-surface-2); border-color: rgba(79, 209, 197, .45); transform: translateY(-1px); }
+        #empty-state .grid > button > div:first-child { color: var(--marlin-text); font-weight: 600; }
+        #empty-state .grid > button > div:last-child { color: var(--marlin-muted); }
+        #empty-state .flex.flex-wrap > button { background: var(--marlin-surface-2); border-color: var(--marlin-border); border-radius: 999px; }
+
+        #chat-container { min-width: 0; overscroll-behavior: contain; }
+        #chat-transcript { padding-left: 12px; padding-right: 12px; gap: 22px; }
+        #chat-transcript > div { max-width: 720px; }
+        #chat-transcript .content-area { color: var(--marlin-text); line-height: 1.75; overflow-wrap: anywhere; }
+        #chat-transcript .prose pre { background: var(--marlin-surface) !important; border-color: var(--marlin-border) !important; border-radius: 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
+        #chat-transcript .prose th { background: var(--marlin-surface-2) !important; border-color: var(--marlin-border) !important; }
+        #chat-transcript .prose td { border-color: var(--marlin-border) !important; }
+        #chat-transcript .prose blockquote { border-color: var(--marlin-accent) !important; color: var(--marlin-muted) !important; }
+        #thought-accordion { background: var(--marlin-surface) !important; border-color: var(--marlin-border) !important; border-radius: 14px; }
+        #chat-transcript .action-bar button:hover { color: var(--marlin-accent) !important; }
+
+        #chat-composer { position: sticky; bottom: 0; background: rgba(12, 16, 20, .96) !important; border-color: transparent !important; backdrop-filter: blur(14px); }
+        #chat-composer > div { max-width: 720px; }
+        #chat-form { background: var(--marlin-surface) !important; border-color: var(--marlin-border) !important; border-radius: 22px !important; padding: 10px !important; box-shadow: 0 12px 34px -20px #000; }
+        #chat-form:focus-within { border-color: rgba(79, 209, 197, .55) !important; }
+        #main-input { min-height: 44px; font-family: var(--marlin-font); color: var(--marlin-text) !important; }
+        #main-input::placeholder { color: var(--marlin-subtle) !important; }
+        #provider-picker { min-height: 38px; border: 1px solid var(--marlin-border); border-radius: 10px !important; background: transparent !important; }
+        #provider-picker:hover, #provider-picker[aria-expanded="true"] { background: var(--marlin-surface-2) !important; color: var(--marlin-text) !important; }
+        #submit-btn { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 14px !important; background: var(--marlin-accent) !important; color: var(--marlin-accent-ink) !important; }
+        #submit-btn:hover:not(:disabled) { background: #69ddd2 !important; }
+        #submit-btn:disabled { opacity: .6; }
+
+        #chat-composer .mode-btn { min-height: 42px; border-radius: 999px; color: var(--marlin-muted) !important; }
+        #chat-composer .mode-btn.bg-chat-input { background: var(--marlin-surface-2) !important; border-color: rgba(79, 209, 197, .3) !important; color: var(--marlin-accent) !important; box-shadow: 0 0 0 1px rgba(79, 209, 197, .12); }
+        .model-picker-menu { background: var(--marlin-surface) !important; border-color: var(--marlin-border) !important; border-radius: 16px !important; box-shadow: 0 18px 44px rgba(0, 0, 0, .48); }
+        .model-picker-detail { background: var(--marlin-surface-2) !important; border-color: var(--marlin-border) !important; }
+        .model-picker-option { color: var(--marlin-text) !important; }
+        .model-picker-option:hover, .model-picker-option.active { background: #202b33 !important; }
+        .model-picker-option .model-check, .picker-effort-check { color: var(--marlin-accent) !important; }
+        .picker-model-icon { background: var(--marlin-surface-2) !important; color: var(--marlin-muted) !important; }
+        .picker-badge { background: rgba(79, 209, 197, .14) !important; color: var(--marlin-accent) !important; }
+        .model-picker-trigger[aria-expanded="true"] { background: var(--marlin-surface-2) !important; color: var(--marlin-text) !important; }
+
+        .experiment-container, .quiz-container { background: var(--marlin-surface) !important; border-color: var(--marlin-border) !important; border-radius: 18px; }
+        .experiment-scene { background: radial-gradient(circle at 50% 30%, #1a222b 0%, #131920 60%, #0c1014 100%) !important; border-color: var(--marlin-border) !important; }
+        .experiment-graph, .experiment-results, .quiz-question-box { background: var(--marlin-surface-2) !important; border-color: var(--marlin-border) !important; }
+        .visual-control, .exp-param, .quiz-option { background: var(--marlin-surface-2) !important; border-color: var(--marlin-border) !important; color: var(--marlin-text) !important; }
+        .visual-control.active, .experiment-controls .visual-control.active { background: var(--marlin-accent) !important; border-color: var(--marlin-accent) !important; color: var(--marlin-accent-ink) !important; }
+        .quiz-submit-btn { background: var(--marlin-accent) !important; color: var(--marlin-accent-ink) !important; }
+        .picker-thinking-switch[aria-checked="true"] { background: var(--marlin-accent) !important; }
+
+        @media (max-width: 767px) {
+            #chat-composer { padding-left: max(.75rem, env(safe-area-inset-left)); padding-right: max(.75rem, env(safe-area-inset-right)); }
+            #chat-transcript > div { width: 100%; max-width: 100%; min-width: 0; }
+            #chat-form { border-radius: 20px !important; }
+            #main-input { min-height: 44px; font-size: 16px !important; }
+            #submit-btn { min-width: 44px; min-height: 44px; }
+        }
 
     </style>
 </head>
@@ -447,12 +538,7 @@
     <div id="splash-screen" class="fixed inset-0 z-[100] bg-chat-bg flex flex-col items-center justify-center">
         <div class="splash-content flex flex-col items-center gap-5">
             <div class="flex items-center justify-center text-white">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="w-24 h-24 animate-[spin_6s_linear_infinite]">
-                    <ellipse cx="12" cy="12" rx="10" ry="3.5" transform="rotate(45 12 12)"></ellipse>
-                    <ellipse cx="12" cy="12" rx="10" ry="3.5" transform="rotate(-45 12 12)"></ellipse>
-                    <ellipse cx="12" cy="12" rx="10" ry="3.5" transform="rotate(90 12 12)"></ellipse>
-                    <ellipse cx="12" cy="12" rx="10" ry="3.5"></ellipse>
-                </svg>
+                <img src="/marlin-bot.svg" alt="" class="w-[88px] h-[96px] object-contain">
             </div>
             <h1 class="text-3xl font-semibold tracking-tight text-white">Marlin</h1>
         </div>
@@ -514,12 +600,7 @@
                     <i data-lucide="menu" class="w-5 h-5"></i>
                 </button>
                 <div class="flex items-center gap-2 ml-1">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-blue-500 animate-[spin_6s_linear_infinite]">
-                        <ellipse cx="12" cy="12" rx="10" ry="3.5" transform="rotate(45 12 12)"></ellipse>
-                        <ellipse cx="12" cy="12" rx="10" ry="3.5" transform="rotate(-45 12 12)"></ellipse>
-                        <ellipse cx="12" cy="12" rx="10" ry="3.5" transform="rotate(90 12 12)"></ellipse>
-                        <ellipse cx="12" cy="12" rx="10" ry="3.5"></ellipse>
-                    </svg>
+                    <img src="/marlin-bot.svg" alt="" class="w-7 h-7 object-contain">
                     <span class="font-medium tracking-tight">Marlin</span>
                 </div>
             </div>
@@ -531,12 +612,7 @@
         <div id="chat-container" class="flex-1 overflow-y-auto scroll-smooth">
             <div id="empty-state" class="h-full flex flex-col items-center justify-center px-4 text-center max-w-2xl mx-auto opacity-100 transition-opacity duration-500 min-h-[60vh]">
                 <div class="mb-6 flex items-center justify-center text-blue-500">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="w-20 h-20 animate-[spin_6s_linear_infinite]">
-                        <ellipse cx="12" cy="12" rx="10" ry="3.5" transform="rotate(45 12 12)"></ellipse>
-                        <ellipse cx="12" cy="12" rx="10" ry="3.5" transform="rotate(-45 12 12)"></ellipse>
-                        <ellipse cx="12" cy="12" rx="10" ry="3.5" transform="rotate(90 12 12)"></ellipse>
-                        <ellipse cx="12" cy="12" rx="10" ry="3.5"></ellipse>
-                    </svg>
+                    <img src="/marlin-bot.svg" alt="" class="w-[140px] h-[154px] object-contain">
                 </div>
                 <h1 class="text-2xl font-semibold mb-8">How can I help you learn today?</h1>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
@@ -712,19 +788,14 @@
 
     <template id="tpl-user-msg">
         <div class="w-full max-w-3xl mx-auto px-4 flex justify-end mb-4">
-            <div class="bg-[#2f2f2f] text-chat-text rounded-2xl rounded-tr-sm px-5 py-3 max-w-[85%] whitespace-pre-wrap text-sm md:text-base border border-[#383838]"></div>
+            <div class="bg-[#1a222b] text-chat-text rounded-2xl rounded-tr-sm px-5 py-3 max-w-[85%] whitespace-pre-wrap text-sm md:text-base border border-[#243039]"></div>
         </div>
     </template>
 
     <template id="tpl-ai-msg">
         <div class="w-full max-w-3xl mx-auto px-4 flex gap-4 mb-4">
-            <div class="w-8 h-8 flex items-center justify-center shrink-0 text-blue-500 mt-1">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 ai-logo-svg transition-transform duration-300">
-                    <ellipse cx="12" cy="12" rx="10" ry="3.5" transform="rotate(45 12 12)"></ellipse>
-                    <ellipse cx="12" cy="12" rx="10" ry="3.5" transform="rotate(-45 12 12)"></ellipse>
-                    <ellipse cx="12" cy="12" rx="10" ry="3.5" transform="rotate(90 12 12)"></ellipse>
-                    <ellipse cx="12" cy="12" rx="10" ry="3.5"></ellipse>
-                </svg>
+            <div class="w-8 h-8 flex items-center justify-center shrink-0 mt-1">
+                <img src="/marlin-bot.svg" alt="" class="w-7 h-7 ai-logo-svg object-contain transition-transform duration-300">
             </div>
             <div class="flex-1 min-w-0">
                 <details class="group mb-3 border border-chat-border rounded-lg bg-[#1a1a1a] text-xs overflow-hidden hidden" id="thought-accordion">

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" role="img" aria-labelledby="title">
+  <title id="title">Marlin bot</title>
+  <style>
+    .shadow { transform-box: fill-box; transform-origin: center; animation: shadow 4s ease-in-out infinite; }
+    .float { animation: float 4s ease-in-out infinite; }
+    .look { transform: translate(0, 0); animation: look 9s ease-in-out infinite; }
+    .eyeL, .eyeR { transform-box: fill-box; transform-origin: center; animation: blink 5s infinite; }
+    .shine { animation: shine 6s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+    @keyframes shadow { 0%, 100% { transform: scale(1); opacity: .9; } 50% { transform: scale(.78); opacity: .5; } }
+    @keyframes look { 0%, 12%, 70%, 100% { transform: translate(0, 0); } 22%, 38% { transform: translate(9px, -3px); } 48%, 60% { transform: translate(-9px, 2px); } }
+    @keyframes blink { 0%, 90%, 100% { transform: scaleY(1); } 94% { transform: scaleY(.08); } }
+    @keyframes shine { 0%, 100% { opacity: .18; } 50% { opacity: .32; } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <defs>
+    <radialGradient id="body" cx="35%" cy="28%" r="80%">
+      <stop offset="0" stop-color="#2b2b33"/>
+      <stop offset=".45" stop-color="#0f0f13"/>
+      <stop offset="1" stop-color="#050506"/>
+    </radialGradient>
+    <radialGradient id="sh" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#000" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <ellipse class="shadow" cx="100" cy="200" rx="46" ry="8" fill="url(#sh)"/>
+  <g class="float">
+    <circle cx="100" cy="100" r="80" fill="url(#body)"/>
+    <circle cx="100" cy="100" r="79" fill="none" stroke="#5b8cff" stroke-opacity=".18" stroke-width="1.5"/>
+    <ellipse class="shine" cx="70" cy="52" rx="34" ry="16" fill="#fff" transform="rotate(-30 70 52)"/>
+    <g class="look" filter="url(#glow)">
+      <rect class="eyeL" x="69" y="82" width="17" height="34" rx="8.5" fill="#fff"/>
+      <rect class="eyeR" x="114" y="82" width="17" height="34" rx="8.5" fill="#fff"/>
+    </g>
+  </g>
+</svg>
