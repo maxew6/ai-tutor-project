@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scribe - Learn Anything</title>
+    <title>Marlin - Learn Anything</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -44,9 +44,10 @@
 
         html, body { height: 100%; }
         body { background-color: #212121; color: #ececec; -webkit-tap-highlight-color: transparent; }
-        body.h-screen { height: 100vh; height: 100dvh; }
+        body.h-screen { height: 100vh; height: 100dvh; height: var(--app-viewport-height, 100dvh); }
         button { touch-action: manipulation; }
-        #chat-container { -webkit-overflow-scrolling: touch; overscroll-behavior: contain; overflow-x: hidden; }
+        main { min-height: 0; }
+        #chat-container { min-height: 0; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; overflow-x: hidden; }
         .hide-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .prose { min-width: 0; overflow-wrap: break-word; }
@@ -56,7 +57,7 @@
         .katex-display { overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; padding: 0.25rem 0; }
         @media (max-width: 767px) {
             #chat-transcript > div { padding-left: 0.75rem; padding-right: 0.75rem; }
-            .mode-btn { min-height: 36px; }
+            .mode-btn { min-height: 44px; }
             .visual-control, .exp-param { min-height: 36px; }
             .visual-control-range { width: 6.5rem; }
             .exp-param { font-size: 0.72rem; }
@@ -66,6 +67,19 @@
             #empty-state h1 { font-size: 1.35rem; }
             #chat-form { border-radius: 1.25rem; }
         }
+
+        @media (max-width: 767px) {
+            #chat-composer { position: sticky; bottom: 0; }
+            #main-input { min-height: 44px; font-size: 16px; line-height: 1.5; }
+            #submit-btn { min-width: 44px; min-height: 44px; display: grid; place-items: center; }
+            header button, #sidebar button { min-height: 44px; }
+            #chat-transcript > div { width: 100%; max-width: 100%; min-width: 0; }
+            #chat-transcript .content-area { max-width: 100%; overflow-wrap: anywhere; line-height: 1.7; }
+            #chat-transcript .prose pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+        }
+
+        .mode-btn.bg-chat-input { border-color: #4b83f5; box-shadow: 0 0 0 1px rgba(75, 131, 245, 0.22); }
+        #submit-btn:disabled { cursor: wait; opacity: 0.62; }
 
         /* Splash Screen Animations */
         #splash-screen {
@@ -440,7 +454,7 @@
                     <ellipse cx="12" cy="12" rx="10" ry="3.5"></ellipse>
                 </svg>
             </div>
-            <h1 class="text-3xl font-semibold tracking-tight text-white">Scribe</h1>
+            <h1 class="text-3xl font-semibold tracking-tight text-white">Marlin</h1>
         </div>
     </div>
 
@@ -506,7 +520,7 @@
                         <ellipse cx="12" cy="12" rx="10" ry="3.5" transform="rotate(90 12 12)"></ellipse>
                         <ellipse cx="12" cy="12" rx="10" ry="3.5"></ellipse>
                     </svg>
-                    <span class="font-medium tracking-tight">Scribe</span>
+                    <span class="font-medium tracking-tight">Marlin</span>
                 </div>
             </div>
             <button onclick="newChat()" class="p-2 hover:bg-chat-hover rounded-md text-chat-muted hover:text-chat-text md:hidden">
@@ -546,7 +560,7 @@
             <div id="chat-transcript" class="pb-6 pt-6 flex flex-col gap-6 w-full"></div>
         </div>
 
-        <div class="w-full bg-chat-bg pt-2 pb-6 px-3 md:px-8 shrink-0 z-10 border-t border-chat-border md:border-transparent" style="padding-bottom:max(1.5rem, env(safe-area-inset-bottom))">
+        <div id="chat-composer" class="w-full bg-chat-bg pt-2 pb-6 px-3 md:px-8 shrink-0 z-10 border-t border-chat-border md:border-transparent" style="padding-bottom:max(1.5rem, env(safe-area-inset-bottom))">
             <div class="max-w-3xl mx-auto relative">
                 <!-- Section mode buttons above input -->
                 <div class="flex items-center gap-2 mb-3 overflow-x-auto pb-1 hide-scrollbar">
@@ -599,7 +613,7 @@
                                 <span class="picker-model-icon"><i data-lucide="route" class="w-3.5 h-3.5"></i></span>
                                 <span class="flex-1 min-w-0">
                                     <span class="flex items-center gap-1.5 text-sm font-medium">Auto Route <span class="picker-badge">Recommended</span></span>
-                                    <span class="picker-model-description">Let Scribe choose the best model</span>
+                                    <span class="picker-model-description">Let Marlin choose the best model</span>
                                 </span>
                                 <i data-lucide="check" class="model-check w-4 h-4 shrink-0"></i>
                             </button>
@@ -654,7 +668,7 @@
                         </section>
                         <section id="level-detail" class="model-picker-detail" aria-label="Learner level settings" hidden>
                             <div class="picker-detail-title">Learner level</div>
-                            <p class="picker-detail-copy">Choose how deeply Scribe should explain concepts and tailor examples.</p>
+                            <p class="picker-detail-copy">Choose how deeply Marlin should explain concepts and tailor examples.</p>
                             <div class="mt-3">
                                 <button type="button" class="model-picker-option" data-level-option="Beginner" role="menuitem" onclick="setLearnerLevel('Beginner')"><span class="picker-model-icon text-emerald-300"><i data-lucide="sprout" class="w-3.5 h-3.5"></i></span><span class="flex-1 text-sm font-medium">Beginner</span><i data-lucide="check" class="model-check w-4 h-4 shrink-0"></i></button>
                                 <button type="button" class="model-picker-option active" data-level-option="Student" role="menuitem" onclick="setLearnerLevel('Student')"><span class="picker-model-icon text-blue-300"><i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i></span><span class="flex-1 text-sm font-medium">Student</span><i data-lucide="check" class="model-check w-4 h-4 shrink-0"></i></button>
@@ -786,6 +800,16 @@
 
         // Safety net in case DOMContentLoaded is delayed or something upstream breaks
         window.addEventListener('load', hideSplash);
+
+        // Keep the app and bottom composer inside the visible viewport when mobile keyboards open.
+        function syncAppViewportHeight() {
+            const viewportHeight = window.visualViewport?.height || window.innerHeight;
+            document.documentElement.style.setProperty('--app-viewport-height', `${viewportHeight}px`);
+        }
+        syncAppViewportHeight();
+        window.addEventListener('resize', syncAppViewportHeight, { passive: true });
+        window.visualViewport?.addEventListener('resize', syncAppViewportHeight, { passive: true });
+        window.visualViewport?.addEventListener('scroll', syncAppViewportHeight, { passive: true });
 
         // ─── Library config (runs immediately, safe outside DOMContentLoaded) ───
         if (window.markedGfmHeadingId) {
@@ -2118,7 +2142,8 @@
 
             } catch (error) {
                 stopThinking(aiNode);
-                contentArea.innerHTML = `<div class="text-red-500 font-mono text-sm p-3 bg-red-900/20 border border-red-500/30 rounded-lg">Error connecting to backend: ${error.message}<br><br>Please verify your API URL is correctly set and running.</div>`;
+                if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') console.error('AI chat request failed:', error);
+                contentArea.innerHTML = '<div class="text-red-300 text-sm p-3 bg-red-900/20 border border-red-500/30 rounded-lg">Something went wrong. Please try again.</div>';
                 isGenerating = false;
                 ui.submitBtn.disabled = false;
                 ui.input.disabled = false;
